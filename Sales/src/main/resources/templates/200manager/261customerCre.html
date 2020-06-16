@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="~{commons/layout}">
+<head>
+  <title>xxxシステム</title>
+</head>
+<body>
+<div layout:fragment="commons/header">ヘッダー</div>
+<div layout:fragment="commons/menu">メニュー</div>
+<div layout:fragment="contents" id="content">
+<div class="box">
+<h3>顧客新規登録</h3>
+ 	<p th:text="${msg}"></p>
+ 	<form role="form" id="customerCreConf" th:action="@{/customerCreConf}" th:object="${formModel}" method="post">
+	 	<table>
+	 		<tr>
+	 			<th>顧客コード</th>
+				<td><input type="text" name="customerCode" th:value="*{customerCode}"/></td>
+	 		</tr>
+	 		<tr>
+	 			<th>顧客名</th>
+	 			<td><input type="text" name="customerName" th:value="*{customerName}"/></td>
+	 		</tr>
+	 		<tr>
+ 				<th>取引可否</th>
+ 				<td>
+ 					<input type="radio" name="validity" th:value="true" th:field="*{validity}" th:text="取引可"/>
+ 					<input type="radio" name="validity" th:value="false" th:field="*{validity}" th:text="取引不可"/>
+ 				</td>
+ 			</tr>
+	 	</table>
+	 	<button type="submit" class="menuBtn">登録確認へ</button>
+ 	</form>
+</div>
+</div>
+<div layout:fragment="commons/footer">フッター</div>
+</body>
+</html>

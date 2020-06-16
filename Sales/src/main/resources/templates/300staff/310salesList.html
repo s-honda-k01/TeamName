@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="~{commons/layout}">
+<head>
+  <title>xxxシステム</title>
+</head>
+<body>
+<div layout:fragment="commons/header">ヘッダー</div>
+<div layout:fragment="commons/menu">メニュー</div>
+<div layout:fragment="contents" id="content">
+<div class="box">
+<h3>売上一覧</h3>
+ 	<p th:text="${msg}"></p>
+ 	
+ 	<form role="form" id="saleCreConf" th:action="@{/saleCreConf}" th:object="${formModel}" method="post">
+ 		<table>
+ 			<tr>
+	 			<th>顧客</th>
+	 			<td>
+	 				<select id="mtCustomer" name="mtCustomer" size="1">
+	 					<option>顧客を選択してください</option>
+	 					<option th:each="customer:${customerList}" th:value="${customer.customerCode}" th:inline="text">[[${customer.customerName}]]</option>
+	 				</select>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<th>商品</th>
+	 			<td>
+	 				<select id="mtItem" name="mtItem" size="1">
+	 					<option>商品を選択してください</option>
+	 					<option th:each="item:${itemList}" th:value="${item.itemCode}" th:inline="text">[[${item.itemName}]]</option>
+	 				</select>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<th>数量</th>
+	 			<td><input type="text" name="quantity" th:field="*{quantity}" th:errorclass="err" placeholder="必須入力"/></td>
+	 			<td><div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" th:errorclass="err"></div></td>
+	 		</tr>
+	 		<tr>
+	 			<th>売上日</th>
+	 			<td><input type="date" name="salesDateString" th:field="*{salesDateString}" th:errorclass="err" placeholder="必須入力"/></td>
+	 			<td><div th:if="${#fields.hasErrors('salesDateString')}" th:errors="*{salesDateString}" th:errorclass="err"></div></td>
+	 		</tr>
+ 		</table>
+ 		<button type="submit" class="menuBtn">売上登録確認</button>
+ 	</form>
+ 	
+ 	 	<table>
+ 		<tr class="hd2">
+ 			<th>No.</th>
+ 			<th>売上日</th>
+ 			<th>顧客</th>
+ 			<th>商品</th>
+ 			<th>数量</th>
+ 			<th>金額</th>
+ 			<th>商品区分</th>
+ 			<th>仕様</th>
+ 			<th>変更</th>
+ 		</tr>
+ 		<tr th:each="sale,cnt:${salesList}" class="row">
+ 			<td th:text="${cnt.count}" class="c0"/>
+  			<td th:text="${#dates.format(sale.salesDate,'yyyy-MM-dd')}" class="c3"/>
+  			<td th:text="${sale.mtCustomer.customerName}" class="c3"/>
+  			<td th:text="${sale.mtItem.itemName}" class="c3"/>
+  			<td th:text="${sale.quantity}" class="c3"/>
+  			<td th:text="${sale.quantity}*${sale.mtItem.price}" class="c3"/>
+  			<td th:text="${sale.mtItem.mtItemGenre.itemGenreName}" class="c3"/>
+  			<td th:text="${sale.mtItem.spec}" class="c3"/>
+  			<td><form th:action="@{'/saleUpd/'+${sale.salesId}}" method="get"><button type="submit" id="upd" class="">変更</button></form></td>
+ 		</tr>
+ 	</table>
+</div>
+</div>
+<div layout:fragment="commons/footer">フッター</div>
+</body>
+</html>

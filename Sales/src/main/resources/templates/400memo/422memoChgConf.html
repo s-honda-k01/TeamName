@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="~{commons/layout}">
+<head>
+  <title>xxxシステム</title>
+</head>
+<body>
+<div layout:fragment="commons/header">ヘッダー</div>
+<div layout:fragment="commons/menu">メニュー</div>
+<div layout:fragment="contents" id="content">
+<div class="box">
+<h3>メモ変更確認</h3>
+ 	<p th:text="${msg}"></p>
+ 	<form role="form" id="memoChgExe" th:action="@{/memoChgExe}" th:object="${formModel}" method="post">
+ 	<input type="hidden" name="formModel" th:value="${formModel}"/>
+ 	<table>
+ 		<tr>
+ 			<th>件名</th>
+ 			<td class="left" th:text="*{title}"/>
+ 		</tr>
+ 		<tr>
+ 			<th>内容</th>
+ 			<td class="left" th:utext="*{content}"/>
+ 		</tr>
+ 		<tr>
+ 			<th>共有者</th>
+ 			<td><div th:each="shareMember:${shareMembers}">[[${shareMember.userName}]]</div></td>
+ 		</tr>
+ 	</table>
+ 		<button type="submit" class="menuBtn">メモ変更する</button>
+ 	</form>
+</div>
+</div>
+<div layout:fragment="commons/footer">フッター</div>
+</body>
+</html>

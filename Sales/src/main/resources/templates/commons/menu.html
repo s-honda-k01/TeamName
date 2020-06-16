@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>メニュー</title>
+</head>
+<body>
+	<div class="box" th:fragment="frag_menu" id="menu">
+		<p th:text="${userName}+さん"></p>
+		<form role="form" id="logout" th:action="@{/admin/userList}" method="get" sec:authorize="hasRole('ADMIN')">
+			<button type="submit" class="menuBtn">ユーザリスト</button>
+		</form>
+		<form role="form" id="logout" th:action="@{/admin/userCre}" method="post" sec:authorize="hasRole('ADMIN')">
+			<button type="submit" class="menuBtn">新規ユーザ登録</button>
+		</form>
+
+
+		
+		<form role="form" id="logout" th:action="@{/salesList}" method="get" sec:authorize="hasRole('MANAGER')">
+			<button type="submit" class="menuBtn">売上一覧</button>
+		</form>
+		<form role="form" id="logout" th:action="@{/customerList}" method="get" sec:authorize="hasRole('MANAGER')">
+			<button type="submit" class="menuBtn">顧客一覧</button>
+		</form>
+		<form role="form" id="logout" th:action="@{/itemList}" method="get" sec:authorize="hasRole('MANAGER')">
+			<button type="submit" class="menuBtn">商品一覧</button>
+		</form>
+		<form role="form" id="logout" th:action="@{/itemGenreList}" method="get" sec:authorize="hasRole('MANAGER')">
+			<button type="submit" class="menuBtn">商品区分一覧</button>
+		</form>
+		
+		<form role="form" id="logout" th:action="@{/memoTop}" method="get" sec:authorize="hasRole('MANAGER')">
+			<button type="submit" class="menuBtn">メモ</button>
+		</form>
+
+
+				
+		<form role="form" id="logout" th:action="@{/salesList}" method="get" sec:authorize="hasRole('STAFF')">
+			<button type="submit" class="menuBtn">売上一覧</button>
+		</form>
+		
+		<form role="form" id="logout" th:action="@{/memoTop}" method="get" sec:authorize="hasRole('STAFF')">
+			<button type="submit" class="menuBtn">メモ</button>
+		</form>
+
+
+
+		<form role="form" id="logout" th:action="@{/logout}" method="post">
+			<button type="submit" class="menuBtn">ログアウト</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <title>xxxシステム</title>
+  <meta charset="UTF-8">
+  <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+  <div th:replace="commons/header :: frag_header"></div>
+  <div th:replace="commons/menu :: frag_menu"></div>
+  <div layout:fragment="contents"></div>
+  <div th:replace="commons/footer :: frag_footer"></div>
+</body>
+</html>

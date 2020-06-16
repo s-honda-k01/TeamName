@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="~{commons/layout}">
+<head>
+  <title>xxxシステム</title>
+</head>
+<body>
+<div layout:fragment="commons/header">ヘッダー</div>
+<div layout:fragment="commons/menu">メニュー</div>
+<div layout:fragment="contents" id="content">
+<div class="box">
+<h3>売上変更</h3>
+ 	<p th:text="${msg}"></p>
+ 	<form role="form" id="saleUpdConf" th:action="@{/saleUpdConf}" th:object="${formModel}" method="post">
+ 	 	<table>
+	 		<tr>
+	 			<th>顧客</th>
+	 			<td>
+	 				<select id="mtCustomer" name="mtCustomer" size="1">
+	 					<option th:each="customer:${customerList}" th:value="${customer.customerCode}" th:inline="text" th:selected="${customer.customerCode}==*{mtCustomer.customerCode}">[[${customer.customerName}]]</option>
+	 				</select>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<th>商品</th>
+	 			<td>
+	 				<select id="mtItem" name="mtItem" size="1">
+	 					<option th:each="item:${itemList}" th:value="${item.itemCode}" th:inline="text" th:selected="${item.itemCode}==*{mtItem.itemCode}">[[${item.itemName}]]</option>
+	 				</select>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<th>数量</th>
+	 			<td><input type="text" name="quantity" th:field="*{quantity}" th:errorclass="err" placeholder="必須入力"/></td>
+	 			<td><div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" th:errorclass="err"></div></td>
+	 		</tr>
+	 		<tr>
+	 			<th>売上日</th>
+	 			<td><input type="date" name="salesDateString" th:field="*{salesDateString}" th:value="*{salesDate}" th:errorclass="err" placeholder="必須入力"/></td>
+	 			<td><div th:if="${#fields.hasErrors('salesDateString')}" th:errors="*{salesDateString}" th:errorclass="err"></div></td>
+	 		</tr>
+	 	</table>
+ 		<button type="submit" class="menuBtn">変更確認へ</button>
+ 	</form>
+</div>
+</div>
+<div layout:fragment="commons/footer">フッター</div>
+</body>
+</html>

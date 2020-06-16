@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="~{commons/layout}">
+<head>
+  <title>xxxシステム</title>
+</head>
+<body>
+<div layout:fragment="commons/header">ヘッダー</div>
+<div layout:fragment="commons/menu">メニュー</div>
+<div layout:fragment="contents" id="content">
+<div class="box">
+<h3>メモ作成</h3>
+ 	<p th:text="${msg}"></p>
+ 	
+ 	<form role="form" id="memoCreConf" th:action="@{/memoCreConf}" th:object="${formModel}" method="get">
+ 		<table>
+ 			<tr>
+	 			<th>件名</th>
+	 			<td><input type="text" name="title" th:field="*{title}" th:errorclass="err" placeholder="必須入力"/></td>
+	 			<td><div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:errorclass="err"></div></td>
+	 		</tr>
+	 		<tr>
+	 			<th>内容</th>
+				<td><textarea name="content" th:field="*{content}" th:errorclass="err" placeholder="必須入力"></textarea></td>
+				<td><div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" th:errorclass="err"></div></td>
+	 		</tr>
+	 		<tr>
+	 			<th>共有</th>
+	 			<td>
+	 				<select  id="inputMultiCheck" name="inputMultiCheck" multiple="multiple" size="5">
+	 					<option th:each="user:${userList}" th:value="${user.userCode}" th:field="*{inputMultiCheck}">[[${user.userName}]]</option>
+	 				</select>
+	 			</td>	 			
+	 		</tr>
+ 		</table>
+ 		<button type="submit" class="menuBtn">メモ登録確認</button>
+ 	</form>
+</div>
+</div>
+<div layout:fragment="commons/footer">フッター</div>
+</body>
+</html>

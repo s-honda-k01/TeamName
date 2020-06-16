@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+		  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		  	layout:decorator="~{commons/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>〇〇システム</title>
+</head>
+<body>
+<div layout:fragment="commons/header">ヘッダー</div>
+<div layout:fragment="commons/menu">メニュー</div>
+<div layout:fragment="contents" id="content">
+	<div class="box">
+		ユーザトップページ
+	</div>
+</div>
+<div layout:fragment="commons/footer">フッター</div>
+</body>
+</html>

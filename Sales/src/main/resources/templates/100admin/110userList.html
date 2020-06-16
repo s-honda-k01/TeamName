@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="~{commons/layout}">
+<head>
+  <title>xxxシステム</title>
+</head>
+<body>
+<div layout:fragment="commons/header">ヘッダー</div>
+<div layout:fragment="commons/menu">メニュー</div>
+<div layout:fragment="contents" id="content">
+<div class="box">
+<h3>ユーザーリスト</h3>
+ 	<p th:text="${msg}"></p>
+ 	<table>
+ 		<tr class="hd2">
+ 			<th>No.</th>
+ 			<th>ユーザーコード</th>
+ 			<th>ユーザ名</th>
+ 			<th>ロール</th>
+ 			<th>可否</th>
+ 			<th sec:authorize="hasRole('ADMIN')">変更</th>
+ 		</tr>
+ 		<tr th:each="user,userCnt:${userList}" class="row">
+ 			<td th:text="${userCnt.count}" class="c0"/>
+ 			<td th:text="${user.userCode}" class="c4"/>
+ 			<td th:text="${user.userName}" class="c3"/>
+ 			<td th:text="${user.MtRole.roleName}" class="c3"/>
+ 			<td><div th:if="${user.validity}">利用可</div><div th:unless="${user.validity}">利用不可</div></td>
+ 			<td><div th:if="${user.MtRole.roleName}=='admin'">-</div><div th:unless="${user.MtRole.roleName}=='admin'"><a th:href="@{'/userUpd/'+${user.userCode}}">変更</a></div></td>
+ 		</tr>
+ 	</table>
+</div>
+</div>
+<div layout:fragment="commons/footer">フッター</div>
+</body>
+</html>

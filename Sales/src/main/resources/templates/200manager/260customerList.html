@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="~{commons/layout}">
+<head>
+  <title>xxxシステム</title>
+</head>
+<body>
+<div layout:fragment="commons/header">ヘッダー</div>
+<div layout:fragment="commons/menu">メニュー</div>
+<div layout:fragment="contents" id="content">
+<div class="box">
+<h3>顧客一覧</h3>
+ 	<p th:text="${msg}"></p>
+ 	<form th:action="@{/customerCre}" method="post"><button type="submit" id="cre" class="">顧客新規登録</button></form>
+ 	<table>
+ 		<tr class="hd2">
+ 			<th>No.</th>
+ 			<th>顧客コード</th>
+ 			<th>顧客名</th>
+ 			<th>取引可否</th>
+ 			<th>変更</th>
+ 		</tr>
+ 		<tr th:each="customer,cnt:${customerList}" class="row">
+ 			<td th:text="${cnt.count}" class="c0"/>
+ 			<td th:text="${customer.customerCode}" class="c4"/>
+  			<td th:text="${customer.customerName}" class="c3"/>
+  			<td><div th:if="${customer.validity}">取引可</div><div th:unless="${customer.validity}">取引不可</div></td>
+  			<td><form th:action="@{'/customerUpd/'+${customer.customerCode}}" method="get"><button type="submit" id="upd" class="">変更</button></form></td>
+ 		</tr>
+ 	</table>
+</div>
+</div>
+<div layout:fragment="commons/footer">フッター</div>
+</body>
+</html>

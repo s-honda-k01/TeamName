@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="~{commons/layout}">
+<head>
+  <title>xxxシステム</title>
+</head>
+<body>
+<div layout:fragment="commons/header">ヘッダー</div>
+<div layout:fragment="commons/menu">メニュー</div>
+<div layout:fragment="contents" id="content">
+<div class="box">
+<h3>商品登録確認</h3>
+ 	<p th:text="${msg}"></p>
+ 	<form role="form" id="itemRegExe" th:action="@{/itemRegExe}" th:object="${formModel}" method="post">
+ 	<input type="hidden" name="formModel" th:value="${formModel}"/>
+	 	<table>
+	 		<tr>
+	 			<th>商品コード</th>
+	 			<td class="left" th:text="*{itemCode}"/>
+	 		</tr>
+	 		<tr>
+	 			<th>商品名</th>
+	 			<td class="left" th:text="*{itemName}"/>
+	 		</tr>
+	 		<tr>
+	 			<th>商品区分</th>
+	 			<td class="left" th:text="*{mtItemGenre.itemGenreName}"/>
+	 		</tr>
+	 		<tr>
+	 			<th>仕様</th>
+	 			<td class="left" th:text="*{spec}"/>
+	 		</tr>
+	 		<tr>
+	 			<th>単価</th>
+	 			<td class="left" th:text="*{price}"/>
+	 		</tr>
+	 		<tr>
+ 				<th>取扱可否</th>
+ 				<td class="left"><div th:if="*{validity}">取扱可</div><div th:unless="*{validity}">取扱不可</div></td>
+ 			</tr>	
+	 	</table>
+	 	<button type="submit" class="menuBtn">登録する</button>
+ 	</form>
+</div>
+</div>
+<div layout:fragment="commons/footer">フッター</div>
+</body>
+</html>

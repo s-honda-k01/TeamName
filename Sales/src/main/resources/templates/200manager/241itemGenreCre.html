@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="~{commons/layout}">
+<head>
+  <title>xxxシステム</title>
+</head>
+<body>
+<div layout:fragment="commons/header">ヘッダー</div>
+<div layout:fragment="commons/menu">メニュー</div>
+<div layout:fragment="contents" id="content">
+<div class="box">
+<h3>商品区分新規登録</h3>
+ 	<p th:text="${msg}"></p>
+ 	<form role="form" id="itemGenreCreConf" th:action="@{/itemGenreCreConf}" th:object="${formModel}" method="post">
+	 	<table>
+	 		<tr>
+	 			<th>商品区分コード</th>
+				<td><input type="text" name="itemGenreCode" th:value="*{itemGenreCode}"/></td>
+	 		</tr>
+	 		<tr>
+	 			<th>商品区分</th>
+	 			<td><input type="text" name="itemGenreName" th:value="*{itemGenreName}"/></td>
+	 		</tr>
+	 		<tr>
+	 	</table>
+	 	<button type="submit" class="menuBtn">登録確認へ</button>
+ 	</form>
+</div>
+</div>
+<div layout:fragment="commons/footer">フッター</div>
+</body>
+</html>
