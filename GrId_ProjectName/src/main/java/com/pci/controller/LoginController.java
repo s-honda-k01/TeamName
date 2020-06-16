@@ -18,7 +18,7 @@ import com.pci.repository.UserRepository;
 import com.pci.security.UserAccount;
 
 /**
- * ログインコントローラ
+ * ログインコントローラー
  */
 @SessionAttributes("loginUser")
 @Controller
